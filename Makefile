@@ -6,7 +6,7 @@
 #    By: malberte <malberte@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/03 22:08:39 by acoulomb          #+#    #+#              #
-#    Updated: 2018/05/16 23:17:32 by malberte         ###   ########.fr        #
+#    Updated: 2018/05/17 22:49:38 by malberte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ LDFLAGS = -L $(LFTPATH) -lft
 NAME = printf
 
 #SRCS:
-SRCS =	ft_printf.c \
+SRCS =	flags.c \
+		ft_printf.c \
 		main.c
 
 #OBJ:
