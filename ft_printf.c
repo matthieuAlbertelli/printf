@@ -6,7 +6,7 @@
 /*   By: malberte <malberte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 22:16:33 by malberte          #+#    #+#             */
-/*   Updated: 2018/05/18 02:42:15 by malberte         ###   ########.fr       */
+/*   Updated: 2018/05/18 04:16:07 by malberte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ static int	get_flag_conv(t_specs *format, const char *str)
 	CONV_C_UNICODE, CONV_STR_UNICODE, CONV_VOID_HEXA, 0 };
 	int i;
 	
+	if (*str == '\0')
+		return (ERROR);
+	++format->specs_len;
 	i = 0;
 	while(conv[i] && conv[i] != *str)
 		++i;
@@ -79,20 +82,28 @@ int			ft_printf(const char *format, ...)
 			return (ERROR);
 		if (*s == ARG_TAG)
 		{
-			++s;
-			if (*s == ARG_TAG)
+			// ++s;
+			if (*(s + 1) == ARG_TAG)
 			{
 				written_char += write(1, s, 1);
 				if (written_char != 1)
 					return (ERROR);
-				++s;
+				s += 2;
 			}
 			else if (*s == '\0')
 				return (ERROR);
 			else
-				init_specs(&specs, s);
-				// if ((s = ft_specs(&format_params, s)) == NULL)
-					// return (ERROR);
+			{
+				if (init_specs(&specs, s + 1) == ERROR)
+				{
+					write(1, s, specs.specs_len + 1);
+					s += specs.specs_len + 1;
+				}
+				else
+				{
+					
+				}
+			}
 		}
 
 	}
